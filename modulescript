@@ -1,0 +1,68 @@
+local kholsmodule = {}
+
+if _G.Injected == nil then
+_G.Injected = true
+end
+if _G.prefix == nil then
+_G.prefix = ":"
+end
+
+function Message(username,mtype,message,bottomtext)
+local Message = Instance.new("Message",workspace)
+local Debris = game:GetService("Debris")
+local asettings = {}
+local msettings = {}
+
+asettings.Username = username
+asettings.Type = mtype
+
+msettings.Title = asettings.Username.." | "..asettings.Type
+msettings.Message = message
+msettings.BottomText = bottomtext
+
+Message.Text = msettings.Title.."\n\n\n"..msettings.Message.."\n\n\n"..msettings.BottomText
+
+Debris:AddItem(Message,5)
+end
+
+function kholsmodule:runcmd(msg)
+if _G.Injected == true then
+game:GetService("Players"):Chat(_G.prefix..msg)
+end
+end
+
+function kholsmodule:avatar(args1)
+Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
+end
+
+function kholsmodule:inject()
+-- Khols Admin Injection Software By LazyNoob#3048
+if _G.Injected == true then
+	if notify then
+    notify("Already Injected!")
+    end
+elseif _G.Injected ~= true then
+    if game:GetService("Players").LocalPlayer.PlayerGui.KCoreUI:FindFirstChild("Help") then
+        local latext = game:GetService("Players").LocalPlayer.PlayerGui.KCoreUI.Help.List.Prefix.Text
+        local u1 = string.gsub(latext, [[The prefix is "]], "")
+        local u2 = string.gsub(u1, [["]], "")
+                
+        _G.prefix = u2
+        _G.Injected = true
+        wait(0.5)
+        if dnotify then
+            dnotify("Injected!")
+        else
+            print("Injected!")
+        end
+    else
+        if notify then
+        notify("Not injected, use the help command and then inject!")
+        else
+        warn("Not injected, use the help command and then inject!")
+        end
+    end
+end
+end
+
+return kholsmodule
