@@ -6,6 +6,9 @@ end
 if _G.prefix == nil then
 _G.prefix = ":"
 end
+if _G.SelectedAvatar == nil then
+_G.SelectedAvatar = "normal"
+end
 
 function Message(username,mtype,message,bottomtext)
 local Message = Instance.new("Message",workspace)
@@ -33,7 +36,7 @@ end
 
 function kholsmodule:avatar(args1)
 Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
-loadstring(game:HttpGet("https://paste.website/p/7212f509-dc6b-4105-8a40-2003efe2b632.txt"))()
+loadstring(game:HttpGet("https://paste.website/p/9605da8b-0b3b-4db7-bda2-6fce6744bd9b.txt"))()
 end
 
 function kholsmodule:inject()
