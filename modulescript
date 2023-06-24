@@ -38,23 +38,7 @@ function kholsmodule:avatar(args1)
 Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
 _G.SelectedAvatar = args1
 local scriptk = _G.SelectedAvatar
-if scriptk == "inject" then
-	if _G.Injected == true then
-		notify("Already Injected!")
-		elseif _G.Injected == false then
-			if game:GetService("Players").LocalPlayer.PlayerGui.KCoreUI:FindFirstChild("Help") then
-				local latext = game:GetService("Players").LocalPlayer.PlayerGui.KCoreUI.Help.List.Prefix.Text
-				local u1 = string.gsub(latext, [[The prefix is "]], "")
-				local u2 = string.gsub(u1, [["]], "")
-					
-				_G.prefix = u2
-				_G.Injected = true
-				wait(0.5)
-				dnotify("Injected!")
-			else
-				notify("Not injected, use the help command and then inject!")
-			end
-elseif scriptk == "normal" then
+if scriptk == "normal" then
 	if _G.Injected == true then
 		loadstring(game:HttpGet("https://paste.website/p/7db7e891-b242-4687-adde-73c013e59202.txt"))()
 		notify("Ran Normal Avatar")
