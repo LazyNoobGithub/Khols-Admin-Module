@@ -37,7 +37,7 @@ end
 function kholsmodule:avatar(args1)
 Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
 _G.SelectedAvatar = args1
-loadstring(game:HttpGet("https://paste.website/p/a04fa632-22cf-44e0-a12c-81e025bc9e04.txt"))()
+loadstring(game:HttpGet("https://paste.website/p/577b6093-1005-404a-b9b7-8af2bb231cfa.txt"))()
 end
 
 function kholsmodule:inject()
