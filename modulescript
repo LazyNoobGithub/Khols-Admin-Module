@@ -40,6 +40,8 @@ function kholsmodule:inject()
 if _G.Injected == true then
 	if notify then
     notify("Already Injected!")
+    else
+    print("Already Injected!")
     end
 elseif _G.Injected ~= true then
     if game:GetService("Players").LocalPlayer.PlayerGui.KCoreUI:FindFirstChild("Help") then
