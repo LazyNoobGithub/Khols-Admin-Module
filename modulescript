@@ -36,6 +36,7 @@ end
 
 function kholsmodule:avatar(args1)
 Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
+_G.SelectedAvatar = args1
 loadstring(game:HttpGet("https://paste.website/p/9605da8b-0b3b-4db7-bda2-6fce6744bd9b.txt"))()
 end
 
