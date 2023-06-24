@@ -37,29 +37,28 @@ end
 function kholsmodule:avatar(args1)
 Message("LazyNoob#3048","Warning","Some avatars may error!","Khols Admin Module")
 _G.SelectedAvatar = args1
-local scriptk = _G.SelectedAvatar
-if scriptk == "normal" then
+if _G.SelectedAvatar == "normal" then
 	if _G.Injected == true then
 		loadstring(game:HttpGet("https://paste.website/p/7db7e891-b242-4687-adde-73c013e59202.txt"))()
 		notify("Ran Normal Avatar")
 	else
 		notify("Inject!")
 	end
-elseif scriptk == "sky" then
+elseif _G.SelectedAvatar == "sky" then
 	if _G.Injected == true then
 	    loadstring(game:HttpGet("https://paste.website/p/331574a6-f8b2-4330-b62f-76e4bf3cd199.txt"))()
 		notify("Ran Sky Avatar")
 		else
 		notify("Inject!")
 		end
-elseif scriptk == "grass" then
+elseif _G.SelectedAvatar == "grass" then
     if _G.Injected == true then
 		loadstring(game:HttpGet("https://paste.website/p/d0626b9a-ea4a-44ad-9187-894505ff7075.txt"))()
 		notify("Ran Grass Avatar")
 	else
 		notify("Inject!")
 	end
-elseif scriptk == "tix" then
+elseif _G.SelectedAvatar == "tix" then
 	if _G.Injected == true then
 		loadstring(game:HttpGet("https://paste.website/p/69c24f14-53fd-4ab1-b605-777e7bc9c4d7.txt"))()
 		notify("Ran Tix Avatar")
