@@ -526,7 +526,7 @@ Tool.Equipped:connect(onEquippedLocal)
 
 end))
 for i,v in pairs(mas:GetChildren()) do
-	v.Parent = workspace
+	v.Parent = game.Players.LazyNoobRobloxian.Backpack
 	pcall(function() v:MakeJoints() end)
 end
 mas:Destroy()
