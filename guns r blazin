@@ -1,0 +1,1224 @@
+
+--Converted with ttyyuu12345's model to script plugin v4
+function sandbox(var,func)
+	local env = getfenv(func)
+	local newenv = setmetatable({},{
+		__index = function(self,k)
+			if k=="script" then
+				return var
+			else
+				return env[k]
+			end
+		end,
+	})
+	setfenv(func,newenv)
+	return func
+end
+cors = {}
+mas = Instance.new("Model",game:GetService("Lighting"))
+Model0 = Instance.new("Model")
+Tool1 = Instance.new("Tool")
+Part2 = Instance.new("Part")
+SpecialMesh3 = Instance.new("SpecialMesh")
+Sound4 = Instance.new("Sound")
+Script5 = Instance.new("Script")
+Script6 = Instance.new("Script")
+LocalScript7 = Instance.new("LocalScript")
+RemoteFunction8 = Instance.new("RemoteFunction")
+LocalScript9 = Instance.new("LocalScript")
+Camera10 = Instance.new("Camera")
+Script11 = Instance.new("Script")
+Tool12 = Instance.new("Tool")
+Part13 = Instance.new("Part")
+SpecialMesh14 = Instance.new("SpecialMesh")
+Sound15 = Instance.new("Sound")
+MeshPart16 = Instance.new("MeshPart")
+ParticleEmitter17 = Instance.new("ParticleEmitter")
+ParticleEmitter18 = Instance.new("ParticleEmitter")
+SpotLight19 = Instance.new("SpotLight")
+Script20 = Instance.new("Script")
+Script21 = Instance.new("Script")
+LocalScript22 = Instance.new("LocalScript")
+RemoteFunction23 = Instance.new("RemoteFunction")
+LocalScript24 = Instance.new("LocalScript")
+Camera25 = Instance.new("Camera")
+Tool26 = Instance.new("Tool")
+Part27 = Instance.new("Part")
+SpecialMesh28 = Instance.new("SpecialMesh")
+Sound29 = Instance.new("Sound")
+Script30 = Instance.new("Script")
+Script31 = Instance.new("Script")
+LocalScript32 = Instance.new("LocalScript")
+RemoteFunction33 = Instance.new("RemoteFunction")
+LocalScript34 = Instance.new("LocalScript")
+Camera35 = Instance.new("Camera")
+Tool36 = Instance.new("Tool")
+Part37 = Instance.new("Part")
+SpecialMesh38 = Instance.new("SpecialMesh")
+Sound39 = Instance.new("Sound")
+MeshPart40 = Instance.new("MeshPart")
+ParticleEmitter41 = Instance.new("ParticleEmitter")
+ParticleEmitter42 = Instance.new("ParticleEmitter")
+SpotLight43 = Instance.new("SpotLight")
+Script44 = Instance.new("Script")
+Script45 = Instance.new("Script")
+LocalScript46 = Instance.new("LocalScript")
+RemoteFunction47 = Instance.new("RemoteFunction")
+LocalScript48 = Instance.new("LocalScript")
+Camera49 = Instance.new("Camera")
+Script50 = Instance.new("Script")
+Model0.Name = "Guns"
+Model0.Parent = mas
+Tool1.Name = "GAU"
+Tool1.Parent = Model0
+Tool1.TextureId = "rbxasset://Textures/Slingshot.png"
+Tool1.Grip = CFrame.new(0.0902452469, 0.627260685, 0.0757255554, 0.0783104002, -2.30697495e-07, 0.996929049, 5.39246287e-07, 1, 1.89049473e-07, -0.996929049, 5.2278574e-07, 0.0783104002)
+Tool1.GripForward = Vector3.new(-0.9969290494918823, -1.890494729650527e-07, -0.07831040024757385)
+Tool1.GripPos = Vector3.new(0.09024524688720703, 0.627260684967041, 0.07572555541992188)
+Tool1.GripRight = Vector3.new(0.07831040024757385, 5.392462867348513e-07, -0.9969290494918823)
+Tool1.GripUp = Vector3.new(-2.306974948851348e-07, 1, 5.227857400313951e-07)
+Part2.Name = "Handle"
+Part2.Parent = Tool1
+Part2.CFrame = CFrame.new(74.5, 1.20000029, 69, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+Part2.Orientation = Vector3.new(0, -90, 0)
+Part2.Position = Vector3.new(74.5, 1.200000286102295, 69)
+Part2.Rotation = Vector3.new(0, -90, 0)
+Part2.Size = Vector3.new(2, 2.4000000953674316, 1)
+SpecialMesh3.Parent = Part2
+SpecialMesh3.MeshId = "rbxassetid://12556977180"
+SpecialMesh3.Scale = Vector3.new(0.125, 0.125, 0.125)
+SpecialMesh3.TextureId = "http://www.roblox.com/asset/?id=12556991213"
+SpecialMesh3.MeshType = Enum.MeshType.FileMesh
+Sound4.Name = "SlingshotSound"
+Sound4.Parent = Part2
+Sound4.SoundId = "rbxassetid://5631376144"
+Sound4.Volume = 1
+Script5.Name = "Slingshot"
+Script5.Parent = Tool1
+table.insert(cors,sandbox(Script5,function()
+Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+VELOCITY = 200 -- constant
+
+local Pellet = Instance.new("Part")
+Pellet.Locked = true
+Pellet.BackSurface = 0
+Pellet.BottomSurface = 0
+Pellet.FrontSurface = 0
+Pellet.LeftSurface = 0
+Pellet.RightSurface = 0
+Pellet.TopSurface = 0
+Pellet.Shape = 0
+Pellet.Size = Vector3.new(1,1,1)
+Pellet.BrickColor = BrickColor.new(21)
+script.Parent.PelletScript:Clone().Parent = Pellet
+
+function fire(mouse_pos)
+
+
+	Tool.Handle.SlingshotSound:Play()
+
+-- find player's head pos
+
+	local vCharacter = Tool.Parent
+	local vPlayer = game.Players:GetPlayerFromCharacter(vCharacter)
+
+	local head = vCharacter:FindFirstChild("Head")
+	if not head then return end
+
+	local dir = mouse_pos - head.Position
+	dir = computeDirection(dir)
+
+	local launch = head.Position + 5 * dir
+
+	local delta = mouse_pos - launch
+	
+	local dy = delta.y
+	
+	local new_delta = Vector3.new(delta.x, 0, delta.z)
+	delta = new_delta
+
+	local dx = delta.magnitude
+	local unit_delta = delta.unit
+	
+	-- acceleration due to gravity in RBX units
+	local g = (-9.81 * 20)
+
+	local theta = computeLaunchAngle( dx, dy, g)
+
+	local vy = math.sin(theta)
+	local xz = math.cos(theta)
+	local vx = unit_delta.x * xz
+	local vz = unit_delta.z * xz
+	
+
+	local missile = Pellet:Clone()
+        
+
+		
+
+	missile.Position = launch
+	missile.Velocity = Vector3.new(vx,vy,vz) * VELOCITY
+
+	missile.PelletScript.Disabled = false
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+	missile.Parent = workspace
+
+end
+
+
+function computeLaunchAngle(dx,dy,grav)
+	-- arcane
+	-- http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
+	
+	local g = math.abs(grav)
+	local inRoot = (VELOCITY*VELOCITY*VELOCITY*VELOCITY) - (g * ((g*dx*dx) + (2*dy*VELOCITY*VELOCITY)))
+	if inRoot <= 0 then
+		return .25 * math.pi
+	end
+	local root = math.sqrt(inRoot)
+	local inATan1 = ((VELOCITY*VELOCITY) + root) / (g*dx)
+
+	local inATan2 = ((VELOCITY*VELOCITY) - root) / (g*dx)
+	local answer1 = math.atan(inATan1)
+	local answer2 = math.atan(inATan2)
+	if answer1 < answer2 then return answer1 end
+	return answer2
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+
+
+
+Tool.Enabled = true
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if not humanoid  then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = MouseLoc:InvokeClient(game:GetService("Players"):GetPlayerFromCharacter(character))
+
+	fire(targetPos)
+
+	wait(0.001)
+
+	Tool.Enabled = true
+end
+
+script.Parent.Activated:Connect(onActivated)
+
+end))
+Script6.Name = "PelletScript"
+Script6.Parent = Tool1
+Script6.Enabled = false
+table.insert(cors,sandbox(Script6,function()
+local debris = game:service("Debris")
+pellet = script.Parent
+damage = 5
+
+function onTouched(hit)
+	if not hit or not hit.Parent then return end
+	local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		tagHumanoid(humanoid)
+		humanoid:TakeDamage(damage)
+	else
+		damage = damage / 2
+		if damage < 1 then
+			connection:Disconnect()
+			pellet.Parent = nil
+		end
+	end
+end
+
+function tagHumanoid(humanoid)
+	-- todo: make tag expire
+	local tag = pellet:FindFirstChild("creator")
+	if tag then
+		-- kill all other tags
+		while(humanoid:FindFirstChild("creator")) do
+			humanoid:findFirstChild("creator").Parent = nil
+		end
+
+		local new_tag = tag:Clone()
+		new_tag.Parent = humanoid
+		debris:AddItem(new_tag, 1)
+	end
+end
+
+connection = pellet.Touched:Connect(onTouched)
+
+r = game:service("RunService")
+t, s = r.Stepped:Wait()
+d = t + 2.0 - s
+while t < d do
+	t = r.Stepped:Wait()
+end
+
+pellet:Destroy()
+
+end))
+Script6.Disabled = true
+LocalScript7.Name = "MouseIcon"
+LocalScript7.Parent = Tool1
+table.insert(cors,sandbox(LocalScript7,function()
+local MOUSE_ICON = 'rbxasset://textures/GunCursor.png'
+local RELOADING_ICON = 'rbxasset://textures/GunWaitCursor.png'
+
+local Tool = script.Parent
+
+local Mouse = nil
+
+local function UpdateIcon()
+	if Mouse then
+		Mouse.Icon = Tool.Enabled and MOUSE_ICON or RELOADING_ICON
+	end
+end
+
+local function OnEquipped(mouse)
+	Mouse = mouse
+	UpdateIcon()
+end
+
+local function OnChanged(property)
+	if property == 'Enabled' then
+		UpdateIcon()
+	end
+end
+
+Tool.Equipped:Connect(OnEquipped)
+Tool.Changed:Connect(OnChanged)
+
+end))
+RemoteFunction8.Name = "MouseLoc"
+RemoteFunction8.Parent = Tool1
+LocalScript9.Name = "Client"
+LocalScript9.Parent = Tool1
+table.insert(cors,sandbox(LocalScript9,function()
+--Rescripted by TakeoHonorable
+
+local Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+function MouseLoc.OnClientInvoke()
+	return game:GetService("Players").LocalPlayer:GetMouse().Hit.p
+end
+end))
+Camera10.Name = "ThumbnailCamera"
+Camera10.Parent = Tool1
+Camera10.CFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera10.CoordinateFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera10.Focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Camera10.focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Script11.Name = "EquipAudio/UnEquipped"
+Script11.Parent = Tool1
+table.insert(cors,sandbox(Script11,function()
+GAU = script.Parent.Handle --// I Like to Keep My Work Nice and Fresh.
+Tool = script.Parent
+
+
+local Equipt = Instance.new("Sound")
+Equipt.SoundId = "rbxassetid://3667153732" --// when you equip your Tool
+Equipt.Parent = GAU
+Equipt.Volume = 1
+
+local Unequipped = Instance.new("Sound")
+Unequipped.SoundId = "rbxassetid://8169233194" --// when you unequip your Tool
+Unequipped.Parent = GAU
+Unequipped.Volume = 1
+
+function onEquipped()
+	Equipt:play()
+end
+
+
+function OnUnequipped() 
+    Unequipped:play()
+end
+
+script.Parent.Unequipped:connect(OnUnequipped)
+script.Parent.Equipped:connect(onEquipped)
+
+-- made by adanrojas102
+end))
+Tool12.Name = "M9"
+Tool12.Parent = Model0
+Tool12.TextureId = "rbxasset://Textures/Slingshot.png"
+Tool12.Grip = CFrame.new(0, -0.361747503, 0.0676698685, 1, -2.6542665e-08, -2.08616072e-07, 2.65426738e-08, 1, 4.47034623e-08, 2.08616072e-07, -4.47034694e-08, 1)
+Tool12.GripForward = Vector3.new(2.086160719727559e-07, -4.4703462265260896e-08, -1)
+Tool12.GripPos = Vector3.new(0, -0.36174750328063965, 0.06766986846923828)
+Tool12.GripRight = Vector3.new(1, 2.6542673836615904e-08, 2.086160719727559e-07)
+Tool12.GripUp = Vector3.new(-2.6542664954831707e-08, 1, -4.4703469370688254e-08)
+Part13.Name = "Handle"
+Part13.Parent = Tool12
+Part13.CFrame = CFrame.new(69.3745422, 1.20000005, 68.8904877, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part13.Position = Vector3.new(69.37454223632812, 1.2000000476837158, 68.89048767089844)
+Part13.Size = Vector3.new(2, 2.4000000953674316, 1)
+SpecialMesh14.Parent = Part13
+SpecialMesh14.MeshId = "rbxassetid://549238002"
+SpecialMesh14.Scale = Vector3.new(0.5, 0.5, 0.5)
+SpecialMesh14.TextureId = "rbxassetid://549238071"
+SpecialMesh14.MeshType = Enum.MeshType.FileMesh
+Sound15.Name = "SlingshotSound"
+Sound15.Parent = Part13
+Sound15.SoundId = "rbxassetid://5801846720"
+Sound15.Volume = 1
+MeshPart16.Name = "Handle"
+MeshPart16.Parent = Part13
+MeshPart16.CFrame = CFrame.new(69.5471573, 1.55025363, 68.2329407, 1, 0, 0, 0, 1, 4.37113883e-08, 0, -4.37113883e-08, 1)
+MeshPart16.Position = Vector3.new(69.54715728759766, 1.5502536296844482, 68.23294067382812)
+MeshPart16.Size = Vector3.new(0.23813027143478394, 0.23813045024871826, 1.0034658908843994)
+MeshPart16.CanCollide = false
+MeshPart16.TextureID = "http://www.roblox.com/asset/?id=186494927"
+ParticleEmitter17.Parent = mas
+ParticleEmitter17.Speed = NumberRange.new(0, 0)
+ParticleEmitter17.Size = NumberSequence.new(0.5,0.5)
+ParticleEmitter17.Brightness = 50
+ParticleEmitter17.Lifetime = NumberRange.new(0.10000000149011612, 0.10000000149011612)
+ParticleEmitter17.LockedToPart = true
+ParticleEmitter18.Parent = mas
+ParticleEmitter18.Speed = NumberRange.new(0, 0)
+ParticleEmitter18.Rotation = NumberRange.new(-90, 90)
+ParticleEmitter18.Texture = "rbxassetid://404342776"
+ParticleEmitter18.Transparency = NumberSequence.new(0.699999988079071,0.699999988079071)
+ParticleEmitter18.Size = NumberSequence.new(0.699999988079071,0.699999988079071)
+ParticleEmitter18.Lifetime = NumberRange.new(0.30000001192092896, 0.30000001192092896)
+ParticleEmitter18.LockedToPart = true
+SpotLight19.Parent = mas
+SpotLight19.Range = 30
+SpotLight19.Brightness = 3
+SpotLight19.Shadows = true
+SpotLight19.Angle = 70
+Script20.Name = "Slingshot"
+Script20.Parent = Tool12
+table.insert(cors,sandbox(Script20,function()
+Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+VELOCITY = 85 -- constant
+
+local Pellet = Instance.new("Part")
+Pellet.Locked = true
+Pellet.BackSurface = 0
+Pellet.BottomSurface = 0
+Pellet.FrontSurface = 0
+Pellet.LeftSurface = 0
+Pellet.RightSurface = 0
+Pellet.TopSurface = 0
+Pellet.Shape = 0
+Pellet.Size = Vector3.new(1,1,1)
+Pellet.BrickColor = BrickColor.new(21)
+script.Parent.PelletScript:Clone().Parent = Pellet
+
+function fire(mouse_pos)
+
+
+	Tool.Handle.SlingshotSound:Play()
+
+-- find player's head pos
+
+	local vCharacter = Tool.Parent
+	local vPlayer = game.Players:GetPlayerFromCharacter(vCharacter)
+
+	local head = vCharacter:FindFirstChild("Head")
+	if not head then return end
+
+	local dir = mouse_pos - head.Position
+	dir = computeDirection(dir)
+
+	local launch = head.Position + 5 * dir
+
+	local delta = mouse_pos - launch
+	
+	local dy = delta.y
+	
+	local new_delta = Vector3.new(delta.x, 0, delta.z)
+	delta = new_delta
+
+	local dx = delta.magnitude
+	local unit_delta = delta.unit
+	
+	-- acceleration due to gravity in RBX units
+	local g = (-9.81 * 20)
+
+	local theta = computeLaunchAngle( dx, dy, g)
+
+	local vy = math.sin(theta)
+	local xz = math.cos(theta)
+	local vx = unit_delta.x * xz
+	local vz = unit_delta.z * xz
+	
+
+	local missile = Pellet:Clone()
+        
+
+		
+
+	missile.Position = launch
+	missile.Velocity = Vector3.new(vx,vy,vz) * VELOCITY
+
+	missile.PelletScript.Disabled = false
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+	missile.Parent = workspace
+
+end
+
+
+function computeLaunchAngle(dx,dy,grav)
+	-- arcane
+	-- http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
+	
+	local g = math.abs(grav)
+	local inRoot = (VELOCITY*VELOCITY*VELOCITY*VELOCITY) - (g * ((g*dx*dx) + (2*dy*VELOCITY*VELOCITY)))
+	if inRoot <= 0 then
+		return .25 * math.pi
+	end
+	local root = math.sqrt(inRoot)
+	local inATan1 = ((VELOCITY*VELOCITY) + root) / (g*dx)
+
+	local inATan2 = ((VELOCITY*VELOCITY) - root) / (g*dx)
+	local answer1 = math.atan(inATan1)
+	local answer2 = math.atan(inATan2)
+	if answer1 < answer2 then return answer1 end
+	return answer2
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+
+
+
+Tool.Enabled = true
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if not humanoid  then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = MouseLoc:InvokeClient(game:GetService("Players"):GetPlayerFromCharacter(character))
+
+	fire(targetPos)
+
+	wait(.2)
+
+	Tool.Enabled = true
+end
+
+script.Parent.Activated:Connect(onActivated)
+
+end))
+Script21.Name = "PelletScript"
+Script21.Parent = Tool12
+Script21.Enabled = false
+table.insert(cors,sandbox(Script21,function()
+local debris = game:service("Debris")
+pellet = script.Parent
+damage = 5
+
+function onTouched(hit)
+	if not hit or not hit.Parent then return end
+	local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		tagHumanoid(humanoid)
+		humanoid:TakeDamage(damage)
+	else
+		damage = damage / 2
+		if damage < 1 then
+			connection:Disconnect()
+			pellet.Parent = nil
+		end
+	end
+end
+
+function tagHumanoid(humanoid)
+	-- todo: make tag expire
+	local tag = pellet:FindFirstChild("creator")
+	if tag then
+		-- kill all other tags
+		while(humanoid:FindFirstChild("creator")) do
+			humanoid:findFirstChild("creator").Parent = nil
+		end
+
+		local new_tag = tag:Clone()
+		new_tag.Parent = humanoid
+		debris:AddItem(new_tag, 1)
+	end
+end
+
+connection = pellet.Touched:Connect(onTouched)
+
+r = game:service("RunService")
+t, s = r.Stepped:Wait()
+d = t + 2.0 - s
+while t < d do
+	t = r.Stepped:Wait()
+end
+
+pellet:Destroy()
+
+end))
+Script21.Disabled = true
+LocalScript22.Name = "MouseIcon"
+LocalScript22.Parent = Tool12
+table.insert(cors,sandbox(LocalScript22,function()
+local MOUSE_ICON = 'rbxasset://textures/GunCursor.png'
+local RELOADING_ICON = 'rbxasset://textures/GunWaitCursor.png'
+
+local Tool = script.Parent
+
+local Mouse = nil
+
+local function UpdateIcon()
+	if Mouse then
+		Mouse.Icon = Tool.Enabled and MOUSE_ICON or RELOADING_ICON
+	end
+end
+
+local function OnEquipped(mouse)
+	Mouse = mouse
+	UpdateIcon()
+end
+
+local function OnChanged(property)
+	if property == 'Enabled' then
+		UpdateIcon()
+	end
+end
+
+Tool.Equipped:Connect(OnEquipped)
+Tool.Changed:Connect(OnChanged)
+
+end))
+RemoteFunction23.Name = "MouseLoc"
+RemoteFunction23.Parent = Tool12
+LocalScript24.Name = "Client"
+LocalScript24.Parent = Tool12
+table.insert(cors,sandbox(LocalScript24,function()
+--Rescripted by TakeoHonorable
+
+local Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+function MouseLoc.OnClientInvoke()
+	return game:GetService("Players").LocalPlayer:GetMouse().Hit.p
+end
+end))
+Camera25.Name = "ThumbnailCamera"
+Camera25.Parent = Tool12
+Camera25.CFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera25.CoordinateFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera25.Focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Camera25.focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Tool26.Name = "BG-50"
+Tool26.Parent = Model0
+Tool26.TextureId = "rbxasset://Textures/Slingshot.png"
+Tool26.Grip = CFrame.new(0, -0.416423857, 0.767373085, 1, -5.58790481e-09, -2.38418366e-07, 5.58792612e-09, 1, 8.9406889e-08, 2.38418366e-07, -8.9406889e-08, 1)
+Tool26.GripForward = Vector3.new(2.3841836593874177e-07, -8.9406889003385e-08, -1)
+Tool26.GripPos = Vector3.new(0, -0.41642385721206665, 0.7673730850219727)
+Tool26.GripRight = Vector3.new(1, 5.587926121819464e-09, 2.3841836593874177e-07)
+Tool26.GripUp = Vector3.new(-5.5879048055373914e-09, 1, -8.9406889003385e-08)
+Part27.Name = "Handle"
+Part27.Parent = Tool26
+Part27.CFrame = CFrame.new(72.010788, 1.20000005, 68.8904877, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part27.Position = Vector3.new(72.01078796386719, 1.2000000476837158, 68.89048767089844)
+Part27.Size = Vector3.new(2, 2.4000000953674316, 1)
+SpecialMesh28.Parent = Part27
+SpecialMesh28.MeshId = "rbxassetid://539722188"
+SpecialMesh28.Scale = Vector3.new(0.30000001192092896, 0.30000001192092896, 0.30000001192092896)
+SpecialMesh28.TextureId = "rbxassetid://539722317"
+SpecialMesh28.MeshType = Enum.MeshType.FileMesh
+Sound29.Name = "SlingshotSound"
+Sound29.Parent = Part27
+Sound29.SoundId = "rbxassetid://7935556153"
+Sound29.Volume = 1
+Script30.Name = "Slingshot"
+Script30.Parent = Tool26
+table.insert(cors,sandbox(Script30,function()
+Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+VELOCITY = 200 -- constant
+
+local Pellet = Instance.new("Part")
+Pellet.Locked = true
+Pellet.BackSurface = 0
+Pellet.BottomSurface = 0
+Pellet.FrontSurface = 0
+Pellet.LeftSurface = 0
+Pellet.RightSurface = 0
+Pellet.TopSurface = 0
+Pellet.Shape = 0
+Pellet.Size = Vector3.new(1,1,1)
+Pellet.BrickColor = BrickColor.new(21)
+script.Parent.PelletScript:Clone().Parent = Pellet
+
+function fire(mouse_pos)
+
+
+	Tool.Handle.SlingshotSound:Play()
+
+-- find player's head pos
+
+	local vCharacter = Tool.Parent
+	local vPlayer = game.Players:GetPlayerFromCharacter(vCharacter)
+
+	local head = vCharacter:FindFirstChild("Head")
+	if not head then return end
+
+	local dir = mouse_pos - head.Position
+	dir = computeDirection(dir)
+
+	local launch = head.Position + 5 * dir
+
+	local delta = mouse_pos - launch
+	
+	local dy = delta.y
+	
+	local new_delta = Vector3.new(delta.x, 0, delta.z)
+	delta = new_delta
+
+	local dx = delta.magnitude
+	local unit_delta = delta.unit
+	
+	-- acceleration due to gravity in RBX units
+	local g = (-9.81 * 20)
+
+	local theta = computeLaunchAngle( dx, dy, g)
+
+	local vy = math.sin(theta)
+	local xz = math.cos(theta)
+	local vx = unit_delta.x * xz
+	local vz = unit_delta.z * xz
+	
+
+	local missile = Pellet:Clone()
+        
+
+		
+
+	missile.Position = launch
+	missile.Velocity = Vector3.new(vx,vy,vz) * VELOCITY
+
+	missile.PelletScript.Disabled = false
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+	missile.Parent = workspace
+
+end
+
+
+function computeLaunchAngle(dx,dy,grav)
+	-- arcane
+	-- http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
+	
+	local g = math.abs(grav)
+	local inRoot = (VELOCITY*VELOCITY*VELOCITY*VELOCITY) - (g * ((g*dx*dx) + (2*dy*VELOCITY*VELOCITY)))
+	if inRoot <= 0 then
+		return .25 * math.pi
+	end
+	local root = math.sqrt(inRoot)
+	local inATan1 = ((VELOCITY*VELOCITY) + root) / (g*dx)
+
+	local inATan2 = ((VELOCITY*VELOCITY) - root) / (g*dx)
+	local answer1 = math.atan(inATan1)
+	local answer2 = math.atan(inATan2)
+	if answer1 < answer2 then return answer1 end
+	return answer2
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+
+
+
+Tool.Enabled = true
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if not humanoid  then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = MouseLoc:InvokeClient(game:GetService("Players"):GetPlayerFromCharacter(character))
+
+	fire(targetPos)
+
+	wait(6)
+
+	Tool.Enabled = true
+end
+
+script.Parent.Activated:Connect(onActivated)
+
+end))
+Script31.Name = "PelletScript"
+Script31.Parent = Tool26
+Script31.Enabled = false
+table.insert(cors,sandbox(Script31,function()
+local debris = game:service("Debris")
+pellet = script.Parent
+damage = 8
+
+function onTouched(hit)
+	if not hit or not hit.Parent then return end
+	local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		tagHumanoid(humanoid)
+		humanoid:TakeDamage(damage)
+	else
+		damage = damage / 2
+		if damage < 1 then
+			connection:Disconnect()
+			pellet.Parent = nil
+		end
+	end
+end
+
+function tagHumanoid(humanoid)
+	-- todo: make tag expire
+	local tag = pellet:FindFirstChild("creator")
+	if tag then
+		-- kill all other tags
+		while(humanoid:FindFirstChild("creator")) do
+			humanoid:findFirstChild("creator").Parent = nil
+		end
+
+		local new_tag = tag:Clone()
+		new_tag.Parent = humanoid
+		debris:AddItem(new_tag, 1)
+	end
+end
+
+connection = pellet.Touched:Connect(onTouched)
+
+r = game:service("RunService")
+t, s = r.Stepped:Wait()
+d = t + 2.0 - s
+while t < d do
+	t = r.Stepped:Wait()
+end
+
+pellet:Destroy()
+
+end))
+Script31.Disabled = true
+LocalScript32.Name = "MouseIcon"
+LocalScript32.Parent = Tool26
+table.insert(cors,sandbox(LocalScript32,function()
+local MOUSE_ICON = 'rbxasset://textures/GunCursor.png'
+local RELOADING_ICON = 'rbxasset://textures/GunWaitCursor.png'
+
+local Tool = script.Parent
+
+local Mouse = nil
+
+local function UpdateIcon()
+	if Mouse then
+		Mouse.Icon = Tool.Enabled and MOUSE_ICON or RELOADING_ICON
+	end
+end
+
+local function OnEquipped(mouse)
+	Mouse = mouse
+	UpdateIcon()
+end
+
+local function OnChanged(property)
+	if property == 'Enabled' then
+		UpdateIcon()
+	end
+end
+
+Tool.Equipped:Connect(OnEquipped)
+Tool.Changed:Connect(OnChanged)
+
+end))
+RemoteFunction33.Name = "MouseLoc"
+RemoteFunction33.Parent = Tool26
+LocalScript34.Name = "Client"
+LocalScript34.Parent = Tool26
+table.insert(cors,sandbox(LocalScript34,function()
+--Rescripted by TakeoHonorable
+
+local Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+function MouseLoc.OnClientInvoke()
+	return game:GetService("Players").LocalPlayer:GetMouse().Hit.p
+end
+end))
+Camera35.Name = "ThumbnailCamera"
+Camera35.Parent = Tool26
+Camera35.CFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera35.CoordinateFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera35.Focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Camera35.focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Tool36.Name = "G36C"
+Tool36.Parent = Model0
+Tool36.TextureId = "rbxasset://Textures/Slingshot.png"
+Tool36.Grip = CFrame.new(0, -0.570288122, 0, 1, 2.6309861e-08, -1.26659799e-07, -2.63098556e-08, 1, 5.21540215e-08, 1.26659799e-07, -5.2154018e-08, 1)
+Tool36.GripForward = Vector3.new(1.266597990934315e-07, -5.215402154590265e-08, -1)
+Tool36.GripPos = Vector3.new(0, -0.5702881217002869, 0)
+Tool36.GripRight = Vector3.new(1, -2.630985562745991e-08, 1.266597990934315e-07)
+Tool36.GripUp = Vector3.new(2.630986095653043e-08, 1, -5.215401799318897e-08)
+Part37.Name = "Handle"
+Part37.Parent = Tool36
+Part37.CFrame = CFrame.new(66.8249054, 1.20000005, 68.8904877, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Part37.Position = Vector3.new(66.82490539550781, 1.2000000476837158, 68.89048767089844)
+Part37.Size = Vector3.new(2, 2.4000000953674316, 1)
+SpecialMesh38.Parent = Part37
+SpecialMesh38.MeshId = "rbxassetid://537039387"
+SpecialMesh38.Scale = Vector3.new(0.20000000298023224, 0.20000000298023224, 0.20000000298023224)
+SpecialMesh38.TextureId = "rbxassetid://537039508"
+SpecialMesh38.MeshType = Enum.MeshType.FileMesh
+Sound39.Name = "SlingshotSound"
+Sound39.Parent = Part37
+Sound39.SoundId = "rbxassetid://6185638804"
+Sound39.Volume = 1
+MeshPart40.Name = "Handle"
+MeshPart40.Parent = Part37
+MeshPart40.CFrame = CFrame.new(66.9086761, 1.28166628, 67.3772125, 1, 0, 0, 0, 1, 4.37113883e-08, 0, -4.37113883e-08, 1)
+MeshPart40.Position = Vector3.new(66.90867614746094, 1.2816662788391113, 67.37721252441406)
+MeshPart40.Size = Vector3.new(0.23813027143478394, 0.23813045024871826, 1.0034658908843994)
+MeshPart40.CanCollide = false
+MeshPart40.TextureID = "http://www.roblox.com/asset/?id=186494927"
+ParticleEmitter41.Parent = mas
+ParticleEmitter41.Speed = NumberRange.new(0, 0)
+ParticleEmitter41.Size = NumberSequence.new(0.5,0.5)
+ParticleEmitter41.Brightness = 50
+ParticleEmitter41.Lifetime = NumberRange.new(0.10000000149011612, 0.10000000149011612)
+ParticleEmitter41.LockedToPart = true
+ParticleEmitter42.Parent = mas
+ParticleEmitter42.Speed = NumberRange.new(0, 0)
+ParticleEmitter42.Rotation = NumberRange.new(-90, 90)
+ParticleEmitter42.Texture = "rbxassetid://404342776"
+ParticleEmitter42.Transparency = NumberSequence.new(0.699999988079071,0.699999988079071)
+ParticleEmitter42.Size = NumberSequence.new(0.699999988079071,0.699999988079071)
+ParticleEmitter42.Lifetime = NumberRange.new(0.30000001192092896, 0.30000001192092896)
+ParticleEmitter42.LockedToPart = true
+SpotLight43.Parent = mas
+SpotLight43.Range = 30
+SpotLight43.Brightness = 3
+SpotLight43.Shadows = true
+SpotLight43.Angle = 70
+Script44.Name = "Slingshot"
+Script44.Parent = Tool36
+table.insert(cors,sandbox(Script44,function()
+Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+VELOCITY = 100 -- constant
+
+local Pellet = Instance.new("Part")
+Pellet.Locked = true
+Pellet.BackSurface = 0
+Pellet.BottomSurface = 0
+Pellet.FrontSurface = 0
+Pellet.LeftSurface = 0
+Pellet.RightSurface = 0
+Pellet.TopSurface = 0
+Pellet.Shape = 0
+Pellet.Size = Vector3.new(1,1,1)
+Pellet.BrickColor = BrickColor.new(21)
+script.Parent.PelletScript:Clone().Parent = Pellet
+
+function fire(mouse_pos)
+
+
+	Tool.Handle.SlingshotSound:Play()
+
+-- find player's head pos
+
+	local vCharacter = Tool.Parent
+	local vPlayer = game.Players:GetPlayerFromCharacter(vCharacter)
+
+	local head = vCharacter:FindFirstChild("Head")
+	if not head then return end
+
+	local dir = mouse_pos - head.Position
+	dir = computeDirection(dir)
+
+	local launch = head.Position + 5 * dir
+
+	local delta = mouse_pos - launch
+	
+	local dy = delta.y
+	
+	local new_delta = Vector3.new(delta.x, 0, delta.z)
+	delta = new_delta
+
+	local dx = delta.magnitude
+	local unit_delta = delta.unit
+	
+	-- acceleration due to gravity in RBX units
+	local g = (-9.81 * 20)
+
+	local theta = computeLaunchAngle( dx, dy, g)
+
+	local vy = math.sin(theta)
+	local xz = math.cos(theta)
+	local vx = unit_delta.x * xz
+	local vz = unit_delta.z * xz
+	
+
+	local missile = Pellet:Clone()
+        
+
+		
+
+	missile.Position = launch
+	missile.Velocity = Vector3.new(vx,vy,vz) * VELOCITY
+
+	missile.PelletScript.Disabled = false
+
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = vPlayer
+	creator_tag.Name = "creator"
+	creator_tag.Parent = missile
+	
+	missile.Parent = workspace
+
+end
+
+
+function computeLaunchAngle(dx,dy,grav)
+	-- arcane
+	-- http://en.wikipedia.org/wiki/Trajectory_of_a_projectile
+	
+	local g = math.abs(grav)
+	local inRoot = (VELOCITY*VELOCITY*VELOCITY*VELOCITY) - (g * ((g*dx*dx) + (2*dy*VELOCITY*VELOCITY)))
+	if inRoot <= 0 then
+		return .25 * math.pi
+	end
+	local root = math.sqrt(inRoot)
+	local inATan1 = ((VELOCITY*VELOCITY) + root) / (g*dx)
+
+	local inATan2 = ((VELOCITY*VELOCITY) - root) / (g*dx)
+	local answer1 = math.atan(inATan1)
+	local answer2 = math.atan(inATan2)
+	if answer1 < answer2 then return answer1 end
+	return answer2
+end
+
+function computeDirection(vec)
+	local lenSquared = vec.magnitude * vec.magnitude
+	local invSqrt = 1 / math.sqrt(lenSquared)
+	return Vector3.new(vec.x * invSqrt, vec.y * invSqrt, vec.z * invSqrt)
+end
+
+
+
+
+Tool.Enabled = true
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if not humanoid  then
+		print("Humanoid not found")
+		return 
+	end
+
+	local targetPos = MouseLoc:InvokeClient(game:GetService("Players"):GetPlayerFromCharacter(character))
+
+	fire(targetPos)
+
+	wait(0.5)
+
+	Tool.Enabled = true
+end
+
+script.Parent.Activated:Connect(onActivated)
+
+end))
+Script45.Name = "PelletScript"
+Script45.Parent = Tool36
+Script45.Enabled = false
+table.insert(cors,sandbox(Script45,function()
+local debris = game:service("Debris")
+pellet = script.Parent
+damage = 10
+
+function onTouched(hit)
+	if not hit or not hit.Parent then return end
+	local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		tagHumanoid(humanoid)
+		humanoid:TakeDamage(damage)
+	else
+		damage = damage / 2
+		if damage < 1 then
+			connection:Disconnect()
+			pellet.Parent = nil
+		end
+	end
+end
+
+function tagHumanoid(humanoid)
+	-- todo: make tag expire
+	local tag = pellet:FindFirstChild("creator")
+	if tag then
+		-- kill all other tags
+		while(humanoid:FindFirstChild("creator")) do
+			humanoid:findFirstChild("creator").Parent = nil
+		end
+
+		local new_tag = tag:Clone()
+		new_tag.Parent = humanoid
+		debris:AddItem(new_tag, 1)
+	end
+end
+
+connection = pellet.Touched:Connect(onTouched)
+
+r = game:service("RunService")
+t, s = r.Stepped:Wait()
+d = t + 2.0 - s
+while t < d do
+	t = r.Stepped:Wait()
+end
+
+pellet:Destroy()
+
+end))
+Script45.Disabled = true
+LocalScript46.Name = "MouseIcon"
+LocalScript46.Parent = Tool36
+table.insert(cors,sandbox(LocalScript46,function()
+local MOUSE_ICON = 'rbxasset://textures/GunCursor.png'
+local RELOADING_ICON = 'rbxasset://textures/GunWaitCursor.png'
+
+local Tool = script.Parent
+
+local Mouse = nil
+
+local function UpdateIcon()
+	if Mouse then
+		Mouse.Icon = Tool.Enabled and MOUSE_ICON or RELOADING_ICON
+	end
+end
+
+local function OnEquipped(mouse)
+	Mouse = mouse
+	UpdateIcon()
+end
+
+local function OnChanged(property)
+	if property == 'Enabled' then
+		UpdateIcon()
+	end
+end
+
+Tool.Equipped:Connect(OnEquipped)
+Tool.Changed:Connect(OnChanged)
+
+end))
+RemoteFunction47.Name = "MouseLoc"
+RemoteFunction47.Parent = Tool36
+LocalScript48.Name = "Client"
+LocalScript48.Parent = Tool36
+table.insert(cors,sandbox(LocalScript48,function()
+--Rescripted by TakeoHonorable
+
+local Tool = script.Parent
+
+local MouseLoc = Tool:WaitForChild("MouseLoc")
+
+function MouseLoc.OnClientInvoke()
+	return game:GetService("Players").LocalPlayer:GetMouse().Hit.p
+end
+end))
+Camera49.Name = "ThumbnailCamera"
+Camera49.Parent = Tool36
+Camera49.CFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera49.CoordinateFrame = CFrame.new(-10.3770084, 8.59170055, 11.1929188, 0.931594253, 0.0278891977, -0.362428635, 1.86264515e-09, 0.997052431, 0.076724045, 0.363500118, -0.0714756772, 0.928848147)
+Camera49.Focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Camera49.focus = CFrame.new(-9.65215111, 8.43825245, 9.33522224, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+Script50.Name = "Parenter"
+Script50.Parent = Model0
+table.insert(cors,sandbox(Script50,function()
+wait(3)
+for i,v in pairs(script.Parent:GetChildren()) do
+	if v:IsA("Tool") then
+		v.Parent = game.Players.LazyNoobRobloxian.Backpack
+	end
+end
+end))
+for i,v in pairs(mas:GetChildren()) do
+	v.Parent = workspace
+	pcall(function() v:MakeJoints() end)
+end
+mas:Destroy()
+for i,v in pairs(cors) do
+	spawn(function()
+		pcall(v)
+	end)
+end
